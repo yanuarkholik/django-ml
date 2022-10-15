@@ -77,15 +77,27 @@ WSGI_APPLICATION = 'learning.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres', 
-        'PASSWORD': 'gt6vaktLQ22QK2m4vIPC', 
-        'HOST':'containers-us-west-100.railway.app', 
-        'PORT':'5833',
+        'NAME': 'django-ml',
+        'USER': 'yanz', 
+        'PASSWORD': 'yanz', 
+        'HOST':'localhost', 
+        'PORT':'5432',
 
     }
 }
 
+if os.environ.get('GITHUB_WORKFLOW'):
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'django-ml',
+        'USER': 'postgres', 
+        'PASSWORD': 'postgres', 
+        'HOST':'localhost', 
+        'PORT':'5432',
+
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
