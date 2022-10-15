@@ -1,0 +1,42 @@
+name: Python application 
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services: 
+      postgres:
+        image: postgres:latest
+        env: 
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: django-ml
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps: 
+    - uses: action/checkout@v2 
+    - name: Set up Python 3.9
+      uses: action/setup-python@v2 
+      with: 
+        python-version: 3.9
+
+    - name: pyscopg2 prerequirities
+      run: sudo apt-get install libpq-dev
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - uses: harmon758/posgresql-action@v1
+      with: 
+        postgresql version: 'l1'
+
+    - name: Run migrations 
+      run: python manage.py migrate
+    - name: Run test
+      run: python manage.py test
