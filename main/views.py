@@ -1,5 +1,4 @@
 import pandas as pd
-from msilib.schema import File
 from django.shortcuts import render
 from django.views.generic import ListView, View
 from django.http import JsonResponse
