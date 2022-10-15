@@ -1,12 +1,12 @@
 from django.test import TestCase
 
-# Create your tests here.
-# from clean import read_csv
+from main.models import Customer
 
 
-# Test function for module  
-# def _test():
-#     assert read_csv('ga_session.csv')
-
-# if __name__ == '__main__':
-#     _test()
+class WebsiteTests(TestCase):
+    def test_page_is_created_successfully(self):
+        customer = Customer(
+            first_name='yanuar',
+            last_name='home'
+        )
+        customer.save()
