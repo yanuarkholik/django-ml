@@ -1,14 +1,22 @@
-from dataclasses import field
+import datetime
+from django import forms
 from django.forms import ModelForm
 
-from .models import Customer, Data
+from .models import Classification, Forecast
 
-class CustomerForm(ModelForm):
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+class ForecastForm(ModelForm):
     class Meta:
-        model = Customer
+        model = Forecast
         fields = '__all__'
+        widgets = {
+            'date_st': DateInput(),
+            'date_end': DateInput(),
+        }
 
-class DataForm(ModelForm):
+class ClassificationForm(ModelForm):
     class Meta:
-        model = Data
-        fields = ('file',)
+        model = Classification
+        fields = '__all__'

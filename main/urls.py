@@ -10,7 +10,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('error/', views.error, name='error-page'),
     path('home/', views.home.as_view(), name='home-page'),
+    
+    path('forecast/', views.forecast, name='forecast-page'),
+    path('classification/', views.classification, name='classification-page'),
 
-    # CRUD
-    path('ajax/create/', views.CreateCustomer.as_view(), name='cust_ajax_create')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
